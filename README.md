@@ -4,7 +4,7 @@
 IBAN is a speacial account adress that can be given players and companies. With These account adreses we can transfer money to another player even if they are offline in the game
 
 ## Features
-Every IBAN transaction can be make with out online player </br>
+Every IBAN transaction can be make without online player </br>
 Bank system for companies </br>
 Last Transactions </br>
 Billing system inside the bank
