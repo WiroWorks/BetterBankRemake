@@ -7,7 +7,7 @@ IBAN is a speacial account adress that can be given players and companies. With 
 Every IBAN transaction can be make with out online player </br>
 Bank system for companies </br>
 Last Transactions </br>
-Billing
+Billing system inside the bank
 
 ## Bugs
 Currently as I know there is no bug
