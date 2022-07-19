@@ -264,6 +264,7 @@ function TransferMoney(senderIBAN, amount, targetIBAN)
 		senderID = ESX.GetPlayerFromIdentifier(senderIdentiier)
 		if senderID ~= nil then
 			senderBalance =senderID.getAccount('bank').money
+		end
 	end
 
 	if isTargetIBANCompany then
@@ -310,7 +311,7 @@ function TransferMoney(senderIBAN, amount, targetIBAN)
 			else
 				targetBalance = targetBalance + amount
                 targetAccount["bank"] = targetBalance
-				MySQL.Async.insert("UPDATE users SET account = @M WHERE IBAN = @IBAN", { 
+				MySQL.Async.insert("UPDATE users SET accounts = @M WHERE IBAN = @IBAN", { 
 					['@IBAN'] = targetIBAN,
 					['@M'] = json.encode(targetAccount)
 				})
