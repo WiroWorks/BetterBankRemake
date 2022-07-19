@@ -19,10 +19,10 @@ execute the BetterBankRemake.sql file in your data base </br>
 add "start BetterBankRemake" in to the your config.cfg </br>
 
 ## Configuration
-You can chech config.lua for configurations
+You can check config.lua for configurations
 
 ## How can I create and open a company bank
-Open your sql database go to the BetterBankCompanies table </br>
+Open your sql database and go to the BetterBankCompanies table </br>
 Create a new row and fill the colums but make sure that IBAN you been chose  is not using by an other player </br>
 Write that trigger code (client side) that you want the open company bank in your script TriggerEvent('BetterBank:CompanyBankOpener', "IBAN HERE")
 
