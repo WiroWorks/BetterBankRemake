@@ -4,6 +4,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Kodchasan&family=Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 
+@font-face {
+    font-family: leftFont;
+    src: url(fonts/first.ttf);
+}
+
+@font-face {
+    font-family: midFont;
+    src: url(fonts/last.otf);
+}
 body {
     margin: 0;
     padding: 0;
@@ -57,6 +66,7 @@ i {
 .sonislemlertext {
     display: inline-block;
     margin-bottom: 15px;
+    font-family: midFont;
 }
 
 .solMenu {
@@ -82,14 +92,19 @@ i {
     border-radius: 15px;
     border: 0px solid;
     text-align: left;
-    font-size: 20px;
+    font-size: 22px;
     padding-left: 10px;
     box-sizing: border-box;
     background-color: transparent;
     align-items: center;
     text-decoration: none;
+    font-family: leftFont;
     color: black;
     transition: 0.2s ease-out;
+}
+
+.fas {
+    padding-top: 5px;
 }
 
 
@@ -192,9 +207,13 @@ i {
 }
 
 .hesapBakiyesi  {
-    font-family: 'Oswald', sans-serif;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 20px;
+    font-family: midFont;
+    font-size: 22px;
+}
+
+.billsText {
+    font-size: 22px;
+    font-family: midFont;
 }
 
 #playerMoneyAmount {
@@ -450,13 +469,14 @@ i {
 }
 
 .faturaGonderenIsım {
+    font-family: 'Source Sans Pro', sans-serif;
     margin-top: 16px;
     margin-bottom: 0px;
 }
 
 .faturaAciklama {
     position: absolute;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 1px;
     color: rgb(144, 147 , 150);
 }
@@ -464,11 +484,15 @@ i {
 .faturaDurum {
     position: absolute;
     bottom: 8px;
-    font-size: 13px;
+    font-size: 15px;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .faturaUcret {
     position: absolute;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     bottom: 8px;
     right: 8px;
     font-size: 19px;

@@ -175,15 +175,17 @@ ESX.RegisterServerCallback('Betterbank:tryToPayBill', function(source, cb, data)
 	cb(false)
 end)
 
-RegisterServerEvent('BetterBank:sendBill')
-AddEventHandler('BetterBank:sendBill', function(label, amount, payerIBAN, senderIBAN, payerFullName, senderFullName, time)
-	if amount > 0 and IsIBANExist(payerIBAN) and IsIBANExist(senderIBAN) then
+RegisterServerEvent('esx_billing:sendBill')
+AddEventHandler('esx_billing:sendBill', function(targetPlayer, sharedAccountName, label, amount)
+	local _source = source
+	-- sharedAccountName not usefull but don't delete it
+	if amount > 0 and IsIBANExist(CreateOrGetIBAN(targetPlayer)) and IsIBANExist(CreateOrGetIBAN(_source)) then
 		MySQL.Async.fetchAll("INSERT INTO billing (payerIBAN, senderIBAN, payerFullName, senderFullName, time, label, amount) VALUES(@pIBAN, @sIBAN, @PFM, @SFN, @time, @label, @amount)",{
-			['@pIBAN'] = payerIBAN,
-			['@sIBAN'] = senderIBAN,
-			['@PFN'] = payerFullName,
-			['@SFN'] = senderFullName,
-			['@time'] = time,
+			['@pIBAN'] = CreateOrGetIBAN(targetPlayer),
+			['@sIBAN'] = CreateOrGetIBAN(_source),
+			['@PFN'] = GetFullnameFromId(targetPlayer),
+			['@SFN'] = GetFullnameFromId(_source),
+			['@time'] = GetDateAndTime(),
 			['@label'] = label,
 			['@amount'] = amount,
 		})
@@ -293,13 +295,6 @@ function TransferMoney(senderIBAN, amount, targetIBAN)
 				senderID.removeAccountMoney('bank', amount)
 			else
                 return false
-				--[[
-				senderBalance = senderBalance - amount
-				MySQL.Async.insert("UPDATE users SET bank = @M WHERE IBAN = @IBAN", { 
-					['@IBAN'] = senderIBAN,
-					['@M'] = senderBalance
-				})
-                ]]
 			end
 		end
 		if isTargetIBANCompany then
@@ -374,6 +369,20 @@ function IsIBANBelongToCompany(IBAN)
 	else
 		return false
 	end
+end
+
+function GetFullnameFromId(id) 
+	local idIdentifier = ESX.GetPlayerFromId(id)
+	local result = MySQL.Sync.fetchAll('SELECT * FROM users WHERE identifier = @identifier', {
+		['@identifier'] = idIdentifier.identifier
+	})
+	return (result[1].firstname .. " " .. result[1].lastname)
+end
+
+function GetDateAndTime()
+	D = os.date("*t")
+	date = tostring(D.day) .. "-" .. tostring(D.month) .. "-" .. tostring(D.year) .. " " .. tostring(D.hour) .. ":" .. tostring(D.min)
+	return date
 end
 
 AddEventHandler('esx:playerLoaded',function(source)

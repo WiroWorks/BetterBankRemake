@@ -14,15 +14,9 @@ $(document).ready(function(){
             $(".bankPanel").fadeOut(400);
         }
     }
-
-    var amountColorClass = {
-        'Deposit': "greenAmountText",
-        'Withdraw': "redAmountText"
-    }
     var billingDatas = [];
     var openedForCompany = false
     display(false)
-
     window.addEventListener('message', function(event) {
         var item = event.data;
         if (item.type == "ui") {
@@ -69,6 +63,14 @@ $(document).ready(function(){
         $.post('http://BetterBankRemake/exit', JSON.stringify({}));
         return
     })
+
+    document.onkeyup = function (data) {
+        if (data.which == 27) {
+            AnimationDisplay(false)
+            $.post('http://BetterBankRemake/exit', JSON.stringify({}));
+            return
+        }
+    };
 
     const checkbox = document.getElementById("toggledark")
     var darkMode = false
@@ -160,9 +162,6 @@ $(document).ready(function(){
             classs = "darkness"
         }
         $("#islemler").html($.parseHTML(('<div class="islem '+classs+'"><div class="islemIconHolder"><i class="'+ data.icon + '" aria-hidden="true"></i></div><div class="islemBilgiHolder"><p class="islemTuruText '+classs+'">'+ data.status +'<a class="gonderenGonderilenBilgi '+classs+'">'+data.comingFrom+'</a></p><span class="'+data.color+'">'+ data.amount +'</span><span class="islemZaman '+classs+'">'+ data.time +'</span></div></div>') + $("#islemler").html()))
-        if (darkMode) {
-
-        }
     }
     
     function AddBill(data) {
@@ -172,18 +171,8 @@ $(document).ready(function(){
     }
 
     function GetDateAndTime() {
-        
         var tarih = new Date();
         return anlik = (("0" + tarih.getDate()).slice(-2) + "-" + ("0" + (tarih.getMonth()+1)).slice(-2)  + "-" + tarih.getFullYear() + " " + ("0" + tarih.getHours()).slice(-2) + ":" + ("0" + tarih.getMinutes()).slice(-2))
-    }
-
-    function BasarisizIslemGoster() {
-        $(".dark").css({ "display":"block"})
-        $("#basarili").html("<i class=\"fal fa-times-circle\"></i><br><p class=\"basariliText\"></p>")
-        $(".basariliText").text("İşlem gerçekleştirilemedi.")
-        setTimeout(function(){jQuery('.dark').fadeIn(1000)}, 500);
-        setTimeout(function(){jQuery('.dark').fadeOut(1000)}, 3000);
-        $(".dark").css({ "display":"none"})
     }
 
     function clearTheUI() {

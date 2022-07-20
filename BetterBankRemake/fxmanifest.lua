@@ -27,5 +27,7 @@ files {
     "UI/main.css",
     "UI/jquery.js",
     "UI/index.js",
-    "UI/hehe.js"
+    "UI/hehe.js",
+    "UI/fonts/first.ttf",
+    "UI/fonts/last.otf"
 }

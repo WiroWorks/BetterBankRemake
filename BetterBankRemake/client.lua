@@ -124,10 +124,6 @@ AddEventHandler('BetterBank:CompanyBankOpener', function(IBAN)
     end, IBAN)
 end)
 
-RegisterCommand('bbank', function(source, args, raw)
-    TriggerEvent('BetterBank:CompanyBankOpener', args[1])
-end)
-
 --===============================================
 --==                 Events                    ==
 --===============================================
@@ -189,10 +185,15 @@ end)
 RegisterNUICallback('payBill', function(datas)
     ESX.TriggerServerCallback('Betterbank:tryToPayBill', function(cb)
         TriggerServerEvent('BetterBank:UpdateBalance')
-        SendNUIMessage({
-            type = "deleteBill",
-            index = datas.data.id,
-        })
+        if cb then
+            SendNUIMessage({
+                type = "deleteBill",
+                index = datas.data.id,
+            })
+            TriggerClientEvent('BetterBank:ShowMessage', "fal fa-check-circle", "Succesful.")
+        else 
+            TriggerClientEvent('BetterBank:ShowMessage', "fal fa-times-circle", "Error.")
+        end
     end, datas.data)
 end)
 
