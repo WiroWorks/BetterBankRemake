@@ -9,6 +9,13 @@ Bank system for companies </br>
 Last Transactions </br>
 Billing system inside the bank
 
+## Changes
+Better optimization </br>
+Little CSS improvements </br>
+Billing system fixed </br>
+ensured bank system for companies </br>
+
+
 ## Bugs
 Currently as I know there is no bug
 
