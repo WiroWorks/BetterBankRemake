@@ -190,9 +190,9 @@ RegisterNUICallback('payBill', function(datas)
                 type = "deleteBill",
                 index = datas.data.id,
             })
-            TriggerClientEvent('BetterBank:ShowMessage', "fal fa-check-circle", "Succesful.")
+            TriggerEvent('BetterBank:ShowMessage', "fal fa-check-circle", "Succesful.")
         else 
-            TriggerClientEvent('BetterBank:ShowMessage', "fal fa-times-circle", "Error.")
+            TriggerEvent('BetterBank:ShowMessage', "fal fa-times-circle", "Error.")
         end
     end, datas.data)
 end)
