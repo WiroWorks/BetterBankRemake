@@ -61,7 +61,7 @@ AddEventHandler('BetterBank:transferMoney', function(IBAN, targetIBAN, time, amo
 	local _source = source
 	local sourceName = ""
 	local targetName = ""
-	if Config.dbMinAmount <= tonumber(amount) and TransferMoney(IBAN, amount, targetIBAN) then
+	if TransferMoney(IBAN, amount, targetIBAN) then
 		if IsIBANBelongToCompany(IBAN) then
 			sourceName = MySQL.Sync.fetchAll('SELECT * FROM betterbankcompanies WHERE IBAN = @IBAN', {
 				['@IBAN'] = IBAN
