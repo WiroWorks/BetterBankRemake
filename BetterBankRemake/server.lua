@@ -388,3 +388,17 @@ end
 AddEventHandler('esx:playerLoaded',function(source)
 	CreateOrGetIBAN(source)
 end)
+
+RegisterServerEvent('Betterbank:tryToCreateBillForCompany')
+AddEventHandler('Betterbank:tryToCreateBillForCompany', function(name, IBAN, money)
+	if IsIBANExist(IBAN) and not IsIBANBelongToCompany(IBAN) then
+	print("Alert some script is tried to create company iban that alredy using by player")
+	elseif not IsIBANExist(IBAN) then
+		MySQL.Async.fetchAll("INSERT INTO betterbankcompanies (fullName, IBAN, moneyAmount) VALUES(@name, @iban, @money)",{
+			['@name'] = name,
+			['@iban'] = IBAN,
+			['@money'] = money,
+		})
+		print("New IBAN is created for a company : " .. name .. " IBAN : " .. IBAN )
+	end
+end)
