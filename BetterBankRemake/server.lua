@@ -389,8 +389,8 @@ AddEventHandler('esx:playerLoaded',function(source)
 	CreateOrGetIBAN(source)
 end)
 
-RegisterServerEvent('Betterbank:tryToCreateBillForCompany')
-AddEventHandler('Betterbank:tryToCreateBillForCompany', function(name, IBAN, money)
+RegisterServerEvent('Betterbank:tryToCreateIBANForCompany')
+AddEventHandler('Betterbank:tryToCreateIBANForCompany', function(name, IBAN, money)
 	if IsIBANExist(IBAN) and not IsIBANBelongToCompany(IBAN) then
 	print("Alert some script is tried to create company iban that alredy using by player")
 	elseif not IsIBANExist(IBAN) then
