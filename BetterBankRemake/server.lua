@@ -402,3 +402,18 @@ AddEventHandler('Betterbank:tryToCreateIBANForCompany', function(name, IBAN, mon
 		print("New IBAN is created for a company : " .. name .. " IBAN : " .. IBAN )
 	end
 end)
+
+RegisterServerEvent('Betterbank:createBillWithIBANS')
+AddEventHandler('Betterbank:createBillWithIBANS', function(targetIBAN, senderIBAN, targetName, senderName, label, amount)
+	if amount > 0 and IsIBANExist(targetIBAN) and IsIBANExist(senderIBAN) then
+		MySQL.Async.fetchAll("INSERT INTO billing (payerIBAN, senderIBAN, payerFullName, senderFullName, time, label, amount) VALUES(@pIBAN, @sIBAN, @PFN, @SFN, @time, @label, @amount)",{
+			['@pIBAN'] = targetIBAN,
+			['@sIBAN'] = senderIBAN,
+			['@PFN'] = targetName,
+			['@SFN'] = senderName,
+			['@time'] = GetDateAndTime(),
+			['@label'] = label,
+			['@amount'] = amount,
+		})
+	end
+end)
