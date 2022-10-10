@@ -18,7 +18,10 @@ RegisterServerEvent('BetterBank:deposit')
 AddEventHandler('BetterBank:deposit', function(amount, IBAN, time, editedAmount, openedForCompany)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-	if amount == nil or amount <= 0 or amount > xPlayer.getMoney() then
+
+	currentMoney = xPlayer.getMoney()
+
+	if amount == nil or amount <= 0 or amount > currentMoney then
 		TriggerClientEvent('BetterBank:ShowMessage', _source, "fal fa-times-circle", "Error.")
 	else
 		xPlayer.removeMoney(amount)
@@ -40,6 +43,11 @@ AddEventHandler('BetterBank:withdraw', function(amount, IBAN, time, editedAmount
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	amount = tonumber(amount)
 	currentMoney = xPlayer.getAccount('bank').money
+
+	if openedForCompany then
+		currentMoney = GetCompanyBalance(IBAN)
+	end
+
 	if amount == nil or amount <= 0 or amount > currentMoney then
 		TriggerClientEvent('BetterBank:ShowMessage', _source, "fal fa-times-circle", "Error.")
 	else
