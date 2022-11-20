@@ -210,7 +210,7 @@ function CreateOrGetIBAN(source)
 		['@identifier'] = xPlayer.identifier
 	})
 
-	if result[1].IBAN == '0' then 
+	if result[1].IBAN == '0' or result[1].IBAN == nil then 
 		while not IsIBANExist() or result[1].IBAN == '0' do
 			local chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 			local length = 4
